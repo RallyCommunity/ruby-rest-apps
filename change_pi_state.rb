@@ -9,8 +9,9 @@ headers.version = "1.0"
 
 # Connection to Rally
 config = {:base_url => "https://rally1.rallydev.com/slm"}
-config[:username] = "user@co.com"
-config[:password] = "secret"
+#config[:username] = "user@co.com"
+#config[:password] = "secret"
+config[:api_key] = "_abc123"
 config[:workspace] = "W"
 config[:project] = "P"
 config[:headers] = headers 
