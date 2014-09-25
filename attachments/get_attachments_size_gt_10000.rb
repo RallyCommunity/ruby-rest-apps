@@ -23,12 +23,12 @@ rally = RallyAPI::RallyRestJson.new(config)
 query = RallyAPI::RallyQuery.new()
 query.type = :attachment
 query.workspace = {"_ref" => "https://rally1.rallydev.com/slm/webservice/v2.0/workspace/12345" }
-query.fetch = "Artifact,LastUpdateDate,CreationDate,Size,User"
+query.fetch = "Artifact,FormattedID,LastUpdateDate,CreationDate,Size,User"
 query.query_string = "(Size > 10000)"
 
 results = rally.find(query)
 #get attachments above 10000
 results.each do |a|
-	puts "ref: #{a["_ref"]}, \n Size: #{a["Size"]}"
+	puts "ref: #{a["_ref"]}, \n Size: #{a["Size"]}, Artifact: #{a["Artifact"]["FormattedID"]}"
 	a.read
 end
