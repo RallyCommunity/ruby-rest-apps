@@ -14,6 +14,19 @@ config[:project] = "P1"
 config[:version] = "v2.0"
 config[:headers] = headers #from RallyAPI::CustomHttpHeader.new()
 
+filename = ARGV.first
+
+def get_file_as_string(filename)
+  txt = ''
+  f = File.open(filename, "r") 
+  f.each_line do |line|
+    txt += line
+  end
+  return txt
+end
+
+notes = get_file_as_string(filename)
+
 rally = RallyAPI::RallyRestJson.new(config)
 
 
@@ -28,7 +41,7 @@ results = rally.find(query)
 defect = results.first
 puts "Defect #{defect["FormattedID"]} Notes before update: #{defect["Notes"]}"
 
-field_updates = {"Notes" => "done and done"}
+field_updates = {"Notes" => notes}
 defect.update(field_updates)
 puts "Defect #{defect["FormattedID"]} Notes after update: #{defect["Notes"]}"
 
