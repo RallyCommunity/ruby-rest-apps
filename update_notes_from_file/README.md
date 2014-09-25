@@ -38,6 +38,17 @@ The file size 32907 is above max allowed 32768 bytes for Defect.Notes length
 
 This script example is vailable AS IS. It is NOT supported by Rally.
 
+## How to run
+
+- Save the text to be copied to a Rally defect's Notes field to a file
+- In terminal issue this command:
+```
+ruby myscript.rb myfile.txt
+```
+
+See the sample text file with randomly generated content that exceeded the limit - txt.txt
+Removing the last paragraph from the file will allow the update to go through.
+
 ## License
 
 AppTemplate is released under the MIT license.  See the file [LICENSE](./LICENSE) for the full text.
