@@ -20,7 +20,8 @@ config[:version] = "v2.0"
 
 require "base64"
 #encoded_string = Base64.encode64('hello') #results in "Could not convert" error
-encoded_string = Base64.strict_encode64('hello')
+str = 'hello'
+encoded_string = Base64.strict_encode64(str)
 
 #find story by fid
 query = RallyAPI::RallyQuery.new()
@@ -41,7 +42,7 @@ attachment["Content"] = content
 attachment["Artifact"] = story
 attachment["ContentType"] = "application/octet-stream"
 attachment["Name"] = "b.txt"
-attachment["Size"] = "20"
+attachment["Size"] = str.length
 attach = @rally.create("attachment", attachment)
 
 ################end code###########################
