@@ -32,13 +32,13 @@ query.query_string = "(FormattedID = \"US2968\")"
 result = @rally.find(query)
 story = result.first
 
-#story = result.first["_ref"]
-
+#create attachment content
 attachment_content = {}
 attachment_content["Content"] = encoded_string
 
 content = @rally.create("attachmentcontent", attachment_content)
 
+#create attachment
 attachment = {}
 attachment["Content"] = content
 attachment["Artifact"] = story["_ref"]
@@ -48,8 +48,8 @@ attachment["Size"] = img.length
 
 attach = @rally.create("attachment", attachment)
 
+#add this image inline in Description field of the story
 image_link = "https://rally1.rallydev.com/slm/attachment/" + attach["ObjectID"].to_s + "/" + attachment["Name"]
-
 image_source = "<img src=\"#{image_link}\""
 style = " style=\"max-width: 100%;\" />"
 description = image_source + style
