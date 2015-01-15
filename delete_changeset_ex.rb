@@ -41,6 +41,3 @@ changesets_to_delete.each do |c|
   puts "deleting... #{c["_ref"]}"
   c.delete
 end
-
-
-r
