@@ -25,4 +25,7 @@ query.query_string = "(TargetDate > 2015-01-01)"
 results = @rally.find(query)
 results.each do |m|
   puts "Name: #{m["Name"]}, Target Date: #{m["TargetDate"]}"
+  m["Projects"].each do |p|
+    puts "Project Name: #{p["Name"]}"
+  end
 end
