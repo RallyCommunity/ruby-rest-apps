@@ -2,6 +2,12 @@
  # THIS CODE WILL PERMANENTLY DELETE RECYCLE BIN ENTRIES.
  # MAKE SURE TO VERIFY THAT ONLY ITEMS INTENDED FOR DELITION ARE BEING DELETED
  # THIS CODE IS NOT SUPPORTED BY RALLY
+ 
+# This script is open source and is provided on an as-is basis. Rally provides
+# no official support for nor guarantee of the functionality, usability, or
+# effectiveness of this code, nor its suitability for any application that
+# an end-user might have in mind. Use at your own risk: users assume any and
+# all risk associated with use and implementation of this script in their own environment.
 ###############start code###########################
 require 'rally_api'
 
