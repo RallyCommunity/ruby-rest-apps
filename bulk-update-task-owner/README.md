@@ -2,7 +2,8 @@ Bulk update tasks' owner
 =========================
 
 ## Overview
-This script example is a proof of concept of how to get attachments in Rally and filter by size
+
+A sample secreenshot of a terminal window when the script is run:
 
 ![](pic1.png)
 
