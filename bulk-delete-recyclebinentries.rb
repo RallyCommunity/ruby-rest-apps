@@ -11,6 +11,12 @@
 ###############start code###########################
 require 'rally_api'
 
+if ARGV.empty?
+  puts " Usage: ruby bulk-delete-recyclebinentries.rb YYYY-MM-DD"
+  puts " Please specify the end deletion date in format YYYY-MM-DD as first argument.\n"
+  exit
+end
+del_date = ARGV[0]
 
 #Setup custom app information
 headers = RallyAPI::CustomHttpHeader.new()
@@ -33,20 +39,25 @@ config[:version] = "v2.0"
 query = RallyAPI::RallyQuery.new()
 query.type = "recyclebinentry"
 query.fetch = "Name,DeletionDate"
-query.query_string = "(DeletionDate < \"2015-01-01\")"
+query.query_string = "(DeletionDate < \"#{del_date}\")"
 
 results = @rally.find(query)
 items_to_delete = [];
 results.each do |i|
   puts "DeletionDate: #{i["DeletionDate"]}, Name: #{i["Name"]}"
   i.read
-  items_to_delete << i
+  items_to_delete << i if i["Name"]
 end
 
 #delete recyclebinentries
 items_to_delete.each do |i|
-  puts "deleting... #{i["_ref"]}"
-  i.delete
+  begin
+    puts "deleting... #{i["_ref"]}"
+    i.delete
+  rescue
+    puts $!, $@
+    next
+  end
 end
 
 
