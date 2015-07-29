@@ -13,6 +13,9 @@ release CSV used in this example:
 
 Result in Rally:
 
+![](pic2.png)
+
+
 ![](pic3.png)
 
 
