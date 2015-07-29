@@ -2,12 +2,12 @@ require 'csv'
 require 'rally_api'
 
 headers = RallyAPI::CustomHttpHeader.new()
-headers.name = "create_projects_from_csv"
+headers.name = "Create stories and tasks"
 headers.vendor = "Nick M RallyLab"
 headers.version = "1.0"
 
 config = {:base_url => "https://rally1.rallydev.com/slm"}
-config[:api_key] = "_abc123" 
+config[:api_key] = "_abc123"  
 config[:headers] = headers 
 config[:version] = "v2.0"
 config[:workspace]  = "NM Import - UTC"
@@ -20,9 +20,13 @@ def csv_to_hash_array(file_path)
   csv.collect {|record| Hash[*fields.zip(record).flatten]}
 end
 
-a = csv_to_hash_array("projects.csv")
+projects = csv_to_hash_array("projects.csv")
 
-puts a.inspect
+releases = csv_to_hash_array("releases.csv")
+
+puts projects.inspect
+puts releases.inspect
+
 
 def find_project(name,workspace)
   puts "find_project with this criteria #{name}, #{workspace}"
@@ -38,6 +42,21 @@ def find_project(name,workspace)
     return nil
   end
   
+end
+
+def create_release(release_hash, project)
+  release_hash.keys.each do |key|
+    release_hash[(key.to_sym rescue key) || key] = release_hash.delete(key)
+  end
+  release_payload = {}
+  release_payload["Project"] = project
+  release_payload["Name"] = release_hash[:Name]
+  release_payload["ReleaseStartDate"] = release_hash[:ReleaseStartDate]
+  release_payload["ReleaseDate"] = release_hash[:ReleaseDate]
+  release_payload["State"] = "Planning"
+  release = @rally.create("release", release_payload)
+  puts "Created a release: #{release["Name"]} in project ref: #{project}"
+  release["_ref"]
 end
 
 def create_project(project_hash)
@@ -60,8 +79,11 @@ def create_project(project_hash)
   project["_ref"]
 end
 
-a.each do |e|
-  create_project(e)
+projects.each do |p|
+  project = create_project(p)
+  releases.each do |r|
+    create_release(r, project)
+  end
 end
 
 
