@@ -1,4 +1,4 @@
-Create Projects and Releases from CSV
+Create Projects with Releases and Iterations from CSV
 =========================
 
 ## Overview
@@ -11,15 +11,13 @@ release CSV used in this example:
 
 ![](pic5.png)
 
+iteration CSV used in this example:
+
+![](pic6.png)
+
 Result in Rally:
 
-![](pic2.png)
-
-
-![](pic3.png)
-
-
-![](pic4.png)
+![](pic0.png)
 
 
 The script was tested with 1.2.1 of rally_api gem
