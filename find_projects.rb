@@ -22,12 +22,13 @@ rally = RallyAPI::RallyRestJson.new(config)
 query = RallyAPI::RallyQuery.new()
 query.fetch = "Name,Owner"
 query.type = :project   
-
+counter = 0
 
 
 results = rally.find(query)
 
 results.each do |p|
+	counter += 1
 	p.read
-	puts "opened project: #{p["Name"]} owner: #{p["Owner"]["_refObjectName"]}"
+	puts "opened project #{counter} : #{p["Name"]} owner: #{p["Owner"]["_refObjectName"]}"
 end
